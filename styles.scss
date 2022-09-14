@@ -134,6 +134,14 @@ body {
     --delay: 13;
     --offset: -250px;
   }
+  &:nth-child(14) {
+    --delay: 14;
+    --offset: 350px;
+  }
+  &:nth-child(15) {
+    --delay: 15;
+    --offset: -350px;
+  }
   &:nth-child(2n) {
     --direction: -1;
   }
@@ -173,6 +181,9 @@ body {
   }
   &.size-12 {
     --size: 12;
+  }
+  &.size-13 {
+    --size: 13;
   }
   &.size-14 {
     --size: 14;
