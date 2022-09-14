@@ -19,13 +19,34 @@
   --background: #1a2b34;
   --gray: #465862;
   --unit: 10px;
-  --container-width: 650px;
+  --container-width: 600px;
+}
+
+@media only screen and (max-width: 1200px) {
+  /*Tablets [601px -> 1200px]*/
+}
+@media only screen and (max-width: 600px) {
+  :root {
+    --unit: 5px;
+    --container-width: 100%;
+  }
+}
+@media only screen and (max-width: 325px) {
+  :root {
+    --unit: 3px;
+  }
 }
 body {
   background: var(--background);
   margin: 0;
-  padding-top: 25px;
-  padding-left: 25px;
+  padding: 25px;
+  color: #fff;
+}
+#animated-texts {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 30px;
 }
 .container {
   position: relative;
@@ -35,14 +56,19 @@ body {
   gap: var(--unit);
   overflow: hidden;
   cursor: ew-resize;
+
   &:not(.duplicate) {
-    > .row {
+    border: 1.5px dotted var(--gray);
+    padding: 5px;
+    > .row,
+    .row2 {
       animation: load-row 1s calc(var(--delay) * 100ms + 500ms) forwards;
     }
   }
   &.no-load {
     &:not(.slide) {
-      .row {
+      .row,
+      .row2 {
         animation: none;
         translate: 0;
       }
@@ -51,12 +77,14 @@ body {
 
   &.slide {
     &:not(.duplicate) {
-      > .row {
+      > .row,
+      .row2 {
         animation: slide 1s calc((var(--delay) - 1) * 100ms) both;
       }
     }
     .container.duplicate {
-      .row {
+      .row,
+      .row2 {
         animation: slide 1s calc((var(--delay) - 1) * 100ms - 150ms) reverse
           both;
         &:nth-child(2n-1) {
@@ -70,13 +98,15 @@ body {
   }
   &.duplicate {
     position: absolute;
-    .row {
+    .row,
+    .row2 {
       translate: var(--container-width);
     }
   }
 }
 
-.row {
+.row,
+.row2 {
   height: var(--unit);
   display: flex;
   justify-content: center;
@@ -146,7 +176,16 @@ body {
     --direction: -1;
   }
 }
-
+.row2 {
+  height: var(--unit);
+  display: flex;
+  justify-content: left;
+  gap: var(--unit);
+  translate: var(--offset);
+  & > *:last-child {
+    flex-grow: 1;
+  }
+}
 .cell {
   height: 100%;
   width: calc(var(--size, 2) * var(--unit));
@@ -178,6 +217,12 @@ body {
   }
   &.size-10 {
     --size: 10;
+  }
+  &.size-10 {
+    --size: 10;
+  }
+  &.size-11 {
+    --size: 11;
   }
   &.size-12 {
     --size: 12;
